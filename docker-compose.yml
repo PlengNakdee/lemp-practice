@@ -9,17 +9,17 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./src:/var/www/php
+      - ./src/backend:/var/www/backend
       - ./.docker/nginx/conf.d:/etc/nginx/conf.d
     depends_on:
-      - php
+      - backend
 
-  # PHP Service
-  php:
-    build: ./.docker/php
-    working_dir: /var/www/php
+  # Backend Service
+  backend:
+    build: ./src/backend
+    working_dir: /var/www/backend
     volumes:
-      - ./src:/var/www/php
+      - ./src/backend:/var/www/backend
     depends_on:
       mysql:
         condition: service_healthy
